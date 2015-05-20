@@ -10,21 +10,42 @@
 				};
 
 				return {
-					show: function (message, type) {
-						callNoty({text: message || settings.text, type: type || settings.type});
+					show: function (message, type, additionalSettings) {
+						callNoty(angular.copy({text: message || settings.text, type: type || settings.type}, additionalSettings));
 					},
 
-					showAlert: function (message) {
-						callNoty({text: message || settings.text, type: "alert"});
+					showAlert: function (message, additionalSettings) {
+						callNoty(angular.copy({text: message || settings.text, type: "alert"}, additionalSettings));
 					},
 
-					showSuccess: function (message) {
-						callNoty({text: message || settings.text, type: "success"});
+					showSuccess: function (message, additionalSettings) {
+						callNoty(angular.copy({text: message || settings.text, type: "success"}, additionalSettings));
 					},
 
-					showError: function (message) {
-						callNoty({text: message, type: "error"});
+					showError: function (message, additionalSettings) {
+						callNoty(angular.copy({text: message, type: "error"}, additionalSettings));
 					},
+					
+                    			showYesNo: function(message, positiveCallback, additionalSettings) {
+                        			callNoty(angular.extend({
+		                            	text: message,
+		                            	buttons: [
+	                                	{
+		                                    addClass: "btn btn-primary",
+		                                    text: "Yes",
+		                                    onClick: function($noty) {
+		                                        positiveCallback();
+		                                        $noty.close();
+	                                	    }
+		                                }, {
+		                                    addClass: "btn btn-danger",
+		                                    text: "No",
+		                                    onClick: function($noty) {
+		                                        $noty.close();
+		                                    }
+		                                }]
+		                        	}, additionalSettings));
+		                    	},
 
 					closeAll: function () {
 						return $.noty.closeAll()
