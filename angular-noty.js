@@ -11,19 +11,19 @@
 
 				return {
 					show: function (message, type, additionalSettings) {
-						callNoty(angular.copy({text: message || settings.text, type: type || settings.type}, additionalSettings));
+						callNoty(angular.extend({text: message || settings.text, type: type || settings.type}, additionalSettings));
 					},
 
 					showAlert: function (message, additionalSettings) {
-						callNoty(angular.copy({text: message || settings.text, type: "alert"}, additionalSettings));
+						callNoty(angular.extend({text: message || settings.text, type: "alert"}, additionalSettings));
 					},
 
 					showSuccess: function (message, additionalSettings) {
-						callNoty(angular.copy({text: message || settings.text, type: "success"}, additionalSettings));
+						callNoty(angular.extend({text: message || settings.text, type: "success"}, additionalSettings));
 					},
 
 					showError: function (message, additionalSettings) {
-						callNoty(angular.copy({text: message, type: "error"}, additionalSettings));
+						callNoty(angular.extend({text: message, type: "error"}, additionalSettings));
 					},
 					
                     			showYesNo: function(message, positiveCallback, additionalSettings) {
