@@ -1,61 +1,72 @@
-(function (angular, $) {
-	return angular.module('notyModule', []).provider('noty', function () {
-		var settings = $.noty.defaults;
+(function(noty) {
+    "use strict";
 
-		return {
-			settings: settings,
-			$get: function () {
-				var callNoty = function (newSettings) {
-					return noty(newSettings || {});
-				};
+    angular.module("services.notifier", [])
+        .factory("$notifier", function() {
+            var defaultSettings = $.noty.defaults;
+            defaultSettings.layout = "center";
+            defaultSettings.killer = true;
+            defaultSettings.modal = true;
 
-				return {
-					show: function (message, type, additionalSettings) {
-						callNoty(angular.extend({text: message || settings.text, type: type || settings.type}, additionalSettings));
-					},
+            return {
+                callNoty: callNoty,
+                show: show,
+                showAlert: showAlert,
+                showSuccess: showSuccess,
+                showError: showError,
+                showYesNo: showYesNo,
+                closeAll: closeAll,
+                clearShowQueue: clearShowQueue
+            };
 
-					showAlert: function (message, additionalSettings) {
-						callNoty(angular.extend({text: message || settings.text, type: "alert"}, additionalSettings));
-					},
+            function callNoty(newSettings) {
+                return noty(newSettings || {});
+            }
 
-					showSuccess: function (message, additionalSettings) {
-						callNoty(angular.extend({text: message || settings.text, type: "success"}, additionalSettings));
-					},
+            function show(message, type, additionalSettings) {
+                callNoty(angular.extend({ text: message || defaultSettings.text, type: type }, additionalSettings));
+            }
 
-					showError: function (message, additionalSettings) {
-						callNoty(angular.extend({text: message, type: "error"}, additionalSettings));
-					},
-					
-                    			showYesNo: function(message, positiveCallback, additionalSettings) {
-                        			callNoty(angular.extend({
-		                            	text: message,
-		                            	buttons: [
-	                                	{
-		                                    addClass: "btn btn-primary",
-		                                    text: "Yes",
-		                                    onClick: function($noty) {
-		                                        positiveCallback();
-		                                        $noty.close();
-	                                	    }
-		                                }, {
-		                                    addClass: "btn btn-danger",
-		                                    text: "No",
-		                                    onClick: function($noty) {
-		                                        $noty.close();
-		                                    }
-		                                }]
-		                        	}, additionalSettings));
-		                    	},
+            function showAlert(message, additionalSettings) {
+                callNoty(angular.extend({ text: message || defaultSettings.text, type: "alert" }, additionalSettings));
+            }
 
-					closeAll: function () {
-						return $.noty.closeAll()
-					},
-					clearShowQueue: function () {
-						return $.noty.clearQueue();
-					}.bind(this)
-				}
-			}
+            function showSuccess(message, additionalSettings) {
+                callNoty(angular.extend({ text: message || defaultSettings.text, type: "success" }, additionalSettings));
+            }
 
-		};
-	})
-}(angular, jQuery));
+            function showError(message, additionalSettings) {
+                callNoty(angular.extend({ text: message, type: "error" }, additionalSettings));
+            }
+
+            function showYesNo(message, positiveCallback, additionalSettings) {
+                callNoty(angular.extend({
+                    text: message,
+                    buttons: [
+                        {
+                            addClass: "btn btn-primary",
+                            text: "Yes",
+                            onClick: function($noty) {
+                                positiveCallback();
+                                $noty.close();
+                            }
+                        }, {
+                            addClass: "btn btn-danger",
+                            text: "No",
+                            onClick: function($noty) {
+                                $noty.close();
+                            }
+                        }
+                    ]
+                }, additionalSettings));
+            }
+
+            function closeAll() {
+                return $.noty.closeAll();
+            }
+
+            function clearShowQueue() {
+                return $.noty.clearQueue();
+            }
+        });
+})(noty);
