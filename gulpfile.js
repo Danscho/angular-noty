@@ -1,16 +1,19 @@
 var gulp = require('gulp'),
-		connect = require('gulp-connect'),
-		concat = require('gulp-concat');
+    concat = require('gulp-concat'),
+    uglify = require('gulp-uglify');
 
 
-gulp.task('scripts', function() {
-	gulp.src(['bower_components/noty/js/noty/packaged/jquery.noty.packaged.min.js','./angular-noty.js'])
-			.pipe(concat('angular-noty.dist.js'))
-			.pipe(gulp.dest('dist'))
+gulp.task('uncompressed', function() {
+    gulp.src(['./notifier.js'])
+        .pipe(concat('notifier.js'))
+        .pipe(gulp.dest('dist'))
 });
 
-gulp.task('connect', function() {
-	connect.server();
+gulp.task('compressed', function() {
+    gulp.src(['./notifier.js'])
+        .pipe(concat('notifier.min.js'))
+        .pipe(uglify())
+        .pipe(gulp.dest('dist'))
 });
 
-gulp.task('default', ['scripts','connect']);
+gulp.task('default', ['uncompressed', 'compressed']);

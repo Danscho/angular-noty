@@ -1,35 +1,28 @@
 <!DOCTYPE html>
-<html ng-app="nottyApp">
+<html>
+
 <head>
+    <meta charset="UTF-8">
     <title>Demo page for Angular Noty</title>
     <script type="text/javascript" src="bower_components/jquery/dist/jquery.min.js"></script>
-    <script type="text/javascript" src="bower_components/angular/angular.min.js"></script>
+    <script type="text/javascript" src="bower_components/angular/angular.js"></script>
     <script type="text/javascript" src="bower_components/noty/js/noty/packaged/jquery.noty.packaged.js"></script>
-    <script type="text/javascript" src="angular-noty.js"></script>
+    <script type="text/javascript" src="dist/notifier.js"></script>
     <script type="text/javascript" src="demo.js"></script>
     <style type="text/css">
-
-        html {
-            height: 100%;
-        }
-
         body {
-            background: #acaacc;
-            height: 100%;
-        }
-        .container {
+            font-family: Arial, Helvetica, sans-serif;
             background: #fff;
             width: 800px;
             margin: 0 auto;
             height: 100%;
-            padding: 10px 5%;
         }
-
+        
         .btn {
             display: inline-block;
             width: 100px;
             text-align: center;
-            background: #3687c1;
+            background: #0044cc;
             color: white;
             vertical-align: middle;
             margin: 10px 0;
@@ -37,14 +30,17 @@
             padding: 5px;
             cursor: pointer;
         }
-
     </style>
 </head>
-<body>
-<div class="container" ng-controller="AppCtrl">
-    <p>Test notty notifications</p>
-    <div class="btn" ng-click="showNotification()">Show notty</div>
-    <div class="btn" ng-click="closeAll()">Close all</div>
-</div>
+
+<body ng-app="demoApp">
+    <h1>Test noty notifications</h1>
+    <div ng-controller="notifierController as ctrl">
+        <input type="text" ng-model="ctrl.notyMessage" />
+        <div class="btn" ng-click="ctrl.showNotification()">Show noty</div>
+        <div class="btn" ng-click="ctrl.showYesNo()">Show YesNo</div>
+        <div class="btn" ng-click="ctrl.close()">Close all</div>
+    </div>
 </body>
+
 </html>
