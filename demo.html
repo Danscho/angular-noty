@@ -4,43 +4,133 @@
 <head>
     <meta charset="UTF-8">
     <title>Demo page for Angular Noty</title>
+    <link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="bower_components/animate.css/animate.css" />
+</head>
+
+<body ng-app="demoApp">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12" ng-controller="notifierController as ctrl">
+                <h1>Test noty notifications</h1>
+                <form>
+                    <div class="form-group">
+                        <label>Message:</label>
+                        <input class="form-control" type="text" ng-model="ctrl.options.text" />
+                    </div>
+
+                    <div class="form-group">
+                        <label>Layout options:</label>
+                        <select class="form-control" ng-model="ctrl.options.layout">
+                            <option value="top">Top</option>
+                            <option value="topLeft">TopLeft</option>
+                            <option value="topCenter">TopCenter</option>
+                            <option value="topRight">TopRight</option>
+                            <option value="centerLeft">CenterLeft</option>
+                            <option value="center">Center</option>
+                            <option value="centerRight">CenterRight</option>
+                            <option value="bottomLeft">BottomLeft</option>
+                            <option value="bottomCenter">BottomCenter</option>
+                            <option value="bottomRight">BottomRight</option>
+                            <option value="bottom">Bottom</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Animation options:</label>
+                        <select class="form-control" ng-model="ctrl.options.animation.open">
+                            <option value="animated bounce">bounce</option>
+                            <option value="animated flash">flash</option>
+                            <option value="animated pulse">pulse</option>
+                            <option value="animated rubberBand">rubberBand</option>
+                            <option value="animated shake">shake</option>
+                            <option value="animated headShake">headShake</option>
+                            <option value="animated swing">swing</option>
+                            <option value="animated tada">tada</option>
+                            <option value="animated wobble">wobble</option>
+                            <option value="animated jello">jello</option>
+                            <option value="animated bounceIn">bounceIn</option>
+                            <option value="animated bounceInDown">bounceInDown</option>
+                            <option value="animated bounceInLeft">bounceInLeft</option>
+                            <option value="animated bounceInRight">bounceInRight</option>
+                            <option value="animated bounceInUp">bounceInUp</option>
+                            <option value="animated bounceOut">bounceOut</option>
+                            <option value="animated bounceOutDown">bounceOutDown</option>
+                            <option value="animated bounceOutLeft">bounceOutLeft</option>
+                            <option value="animated bounceOutRight">bounceOutRight</option>
+                            <option value="animated bounceOutUp">bounceOutUp</option>
+                            <option value="animated fadeIn">fadeIn</option>
+                            <option value="animated fadeInDown">fadeInDown</option>
+                            <option value="animated fadeInDownBig">fadeInDownBig</option>
+                            <option value="animated fadeInLeft">fadeInLeft</option>
+                            <option value="animated fadeInLeftBig">fadeInLeftBig</option>
+                            <option value="animated fadeInRight">fadeInRight</option>
+                            <option value="animated fadeInRightBig">fadeInRightBig</option>
+                            <option value="animated fadeInUp">fadeInUp</option>
+                            <option value="animated fadeInUpBig">fadeInUpBig</option>
+                            <option value="animated fadeOut">fadeOut</option>
+                            <option value="animated fadeOutDown">fadeOutDown</option>
+                            <option value="animated fadeOutDownBig">fadeOutDownBig</option>
+                            <option value="animated fadeOutLeft">fadeOutLeft</option>
+                            <option value="animated fadeOutLeftBig">fadeOutLeftBig</option>
+                            <option value="animated fadeOutRight">fadeOutRight</option>
+                            <option value="animated fadeOutRightBig">fadeOutRightBig</option>
+                            <option value="animated fadeOutUp">fadeOutUp</option>
+                            <option value="animated fadeOutUpBig">fadeOutUpBig</option>
+                            <option value="animated flipInX">flipInX</option>
+                            <option value="animated flipInY">flipInY</option>
+                            <option value="animated flipOutX">flipOutX</option>
+                            <option value="animated flipOutY">flipOutY</option>
+                            <option value="animated lightSpeedIn">lightSpeedIn</option>
+                            <option value="animated lightSpeedOut">lightSpeedOut</option>
+                            <option value="animated rotateIn">rotateIn</option>
+                            <option value="animated rotateInDownLeft">rotateInDownLeft</option>
+                            <option value="animated rotateInDownRight">rotateInDownRight</option>
+                            <option value="animated rotateInUpLeft">rotateInUpLeft</option>
+                            <option value="animated rotateInUpRight">rotateInUpRight</option>
+                            <option value="animated rotateOut">rotateOut</option>
+                            <option value="animated rotateOutDownLeft">rotateOutDownLeft</option>
+                            <option value="animated rotateOutDownRight">rotateOutDownRight</option>
+                            <option value="animated rotateOutUpLeft">rotateOutUpLeft</option>
+                            <option value="animated rotateOutUpRight">rotateOutUpRight</option>
+                            <option value="animated hinge">hinge</option>
+                            <option value="animated rollIn">rollIn</option>
+                            <option value="animated rollOut">rollOut</option>
+                            <option value="animated zoomIn">zoomIn</option>
+                            <option value="animated zoomInDown">zoomInDown</option>
+                            <option value="animated zoomInLeft">zoomInLeft</option>
+                            <option value="animated zoomInRight">zoomInRight</option>
+                            <option value="animated zoomInUp">zoomInUp</option>
+                            <option value="animated zoomOut">zoomOut</option>
+                            <option value="animated zoomOutDown">zoomOutDown</option>
+                            <option value="animated zoomOutLeft">zoomOutLeft</option>
+                            <option value="animated zoomOutRight">zoomOutRight</option>
+                            <option value="animated zoomOutUp">zoomOutUp</option>
+                            <option value="animated slideInDown">slideInDown</option>
+                            <option value="animated slideInLeft">slideInLeft</option>
+                            <option value="animated slideInRight">slideInRight</option>
+                            <option value="animated slideInUp">slideInUp</option>
+                            <option value="animated slideOutDown">slideOutDown</option>
+                            <option value="animated slideOutLeft">slideOutLeft</option>
+                            <option value="animated slideOutRight">slideOutRight</option>
+                            <option value="animated slideOutUp">slideOutUp</option>
+                        </select>
+                    </div>
+
+                    <button class="btn btn-default" ng-click="ctrl.showNotification()">Show noty</button>
+                    <button class="btn btn-default" ng-click="ctrl.showYesNo()">Show YesNo</button>
+                    <button class="btn btn-default" ng-click="ctrl.close()">Close all</button>
+                    <button class="btn btn-danger" ng-click="ctrl.reset()">Reset</button>
+                </form>
+            </div>
+        </div>
+    </div>
     <script type="text/javascript" src="bower_components/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
     <script type="text/javascript" src="bower_components/angular/angular.js"></script>
     <script type="text/javascript" src="bower_components/noty/js/noty/packaged/jquery.noty.packaged.js"></script>
     <script type="text/javascript" src="dist/notifier.js"></script>
     <script type="text/javascript" src="demo.js"></script>
-    <style type="text/css">
-        body {
-            font-family: Arial, Helvetica, sans-serif;
-            background: #fff;
-            width: 800px;
-            margin: 0 auto;
-            height: 100%;
-        }
-        
-        .btn {
-            display: inline-block;
-            width: 100px;
-            text-align: center;
-            background: #0044cc;
-            color: white;
-            vertical-align: middle;
-            margin: 10px 0;
-            border: 1px #acacac solid;
-            padding: 5px;
-            cursor: pointer;
-        }
-    </style>
-</head>
-
-<body ng-app="demoApp">
-    <h1>Test noty notifications</h1>
-    <div ng-controller="notifierController as ctrl">
-        <input type="text" ng-model="ctrl.notyMessage" />
-        <div class="btn" ng-click="ctrl.showNotification()">Show noty</div>
-        <div class="btn" ng-click="ctrl.showYesNo()">Show YesNo</div>
-        <div class="btn" ng-click="ctrl.close()">Close all</div>
-    </div>
 </body>
 
 </html>

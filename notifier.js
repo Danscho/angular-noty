@@ -3,60 +3,58 @@
 
     angular.module("notifier", [])
         .provider("$notifier", function() {
-            this.defaultSettings = $.noty.defaults;
-            this.overrideSettings = function(overriddenSettings) {
-                this.defaultSettings = angular.extend(this.defaultSettings, overriddenSettings);
+            var provider = {
+                settings: $.noty.defaults,
+                configureSettings: function(configSettings) {
+                    provider.settings = angular.extend($.noty.defaults, configSettings);
+                },
+                $get: function() {
+                    return {
+                        show: show,
+                        showAlert: showAlert,
+                        showSuccess: showSuccess,
+                        showError: showError,
+                        showYesNo: showYesNo,
+                        closeAll: closeAll,
+                        clearShowQueue: clearShowQueue
+                    };
+                }
             };
-
-            this.$get = function() {
-                var vm = this;
-
-                return {
-                    show: show,
-                    showAlert: showAlert,
-                    showSuccess: showSuccess,
-                    showError: showError,
-                    showYesNo: showYesNo,
-                    closeAll: closeAll,
-                    clearShowQueue: clearShowQueue
-                };
-            }
-
-            return this;
+            return provider;
 
             function callNoty(newSettings) {
-                return noty(newSettings || {});
+                return noty(angular.extend({}, provider.settings, newSettings) || {});
             }
 
-            function show(message, type, additionalSettings) {
+            function show(message, type, overrideSettings) {
                 callNoty(angular.extend({
-                    text: message || vm.defaultSettings.text,
+                    text: message || provider.settings.text,
                     type: type
-                }, additionalSettings));
+                }, overrideSettings));
             }
 
-            function showAlert(message, additionalSettings) {
+            function showAlert(message, overrideSettings) {
                 callNoty(angular.extend({
-                    text: message || vm.defaultSettings.text,
+                    text: message || provider.settings.text,
                     type: "alert"
-                }, additionalSettings));
+                }, overrideSettings));
             }
 
-            function showSuccess(message, additionalSettings) {
+            function showSuccess(message, overrideSettings) {
                 callNoty(angular.extend({
-                    text: message || vm.defaultSettings.text,
+                    text: message || provider.settings.text,
                     type: "success"
-                }, additionalSettings));
+                }, overrideSettings));
             }
 
-            function showError(message, additionalSettings) {
+            function showError(message, overrideSettings) {
                 callNoty(angular.extend({
                     text: message,
                     type: "error"
-                }, additionalSettings));
+                }, overrideSettings));
             }
 
-            function showYesNo(message, positiveCallback, additionalSettings) {
+            function showYesNo(message, positiveCallback, overrideSettings) {
                 callNoty(angular.extend({
                     text: message,
                     buttons: [{
@@ -73,7 +71,7 @@
                             $noty.close();
                         }
                     }]
-                }, additionalSettings));
+                }, overrideSettings));
             }
 
             function closeAll() {

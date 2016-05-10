@@ -22,6 +22,8 @@
     "dependencies": {
         "noty": "~2.x.x",
         "angular": "~1.x.x",
-        "jquery": "~2.x.x"
+        "jquery": "~2.x.x",
+        "bootstrap": "latest",
+        "animate.css": "latest"
     }
 }

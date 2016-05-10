@@ -1,7 +1,9 @@
 angular-noty
 ============
 
-Forked from [dev-tim](https://github.com/dev-tim/angular-noty)
+Originally by [dev-tim](https://github.com/dev-tim/angular-noty)
+
+Added settings config and overrideable settings per notification.
 
 Wrapper for [noty](ned.im/noty) - cool growl-like notifications. 
 Simple angularJS provider for noty notifications
