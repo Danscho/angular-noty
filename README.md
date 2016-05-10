@@ -1,12 +1,14 @@
 angular-noty
 ============
 
-Wrapper for Noty - cool growl-like notifications. 
-Simple Noty wrapper lib that brings Noty to Angular context. Instalable with bower.
+Forked from [dev-tim](https://github.com/dev-tim/angular-noty)
 
-##Start up dev mode
+Wrapper for [noty](ned.im/noty) - cool growl-like notifications. 
+Simple angularJS provider for noty notifications
 
-To run demo you ust need to have gulp installed and install all the npm and bower deps to the project.
+##Development setup
+
+Install gulp and the necessary npm and bower dependencies
 
 ```
 npm install gulp -g
@@ -18,9 +20,9 @@ gulp
 
 ##How to use it in your project
 
-1. Add link to ``angular-noty.dist.js`` and make sure that you have jquery in your project.
-2. Add ``` notyModule ``` as dependency module to your main angular module.
-3. Inject ``` noty ``` somewhere and you can start using it.
+1. Add link to ``notifier.min.js`` and make sure that you have jquery in your project.
+2. Add ``` notifier ``` as dependency module to your main angular module.
+3. Inject ``` $notifier ``` where you need it.
 
 
 
